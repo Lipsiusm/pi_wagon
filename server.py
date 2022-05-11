@@ -20,10 +20,25 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
 			data = conn.recv(1024)
 			if not data:
 				break
-			
+			#stripping the newline characters
 			if data.decode('utf-8').strip() == 'cpuinfo':
 				cpu_info = pi.get_cpu_info()
-
 				#send pi cpu info to client
 				conn.sendall(cpu_info.encode('utf-8'))
+
+			if data.decode('utf-8').strip() == 'red':
+				#send pi cpu info to client
+				color_red = pi.red_light()
+				print(color_red)
+				#conn.sendall(color_red.encode('utf-8'))
+			if data.decode('utf-8').strip() == 'blue':
+				#send pi cpu info to client
+				color_blue = pi.blue_light()
+				print(color_blue)
+			if data.decode('utf-8').strip() == 'green':
+				#send pi cpu info to client
+				color_green = pi.green_light()
+				print(color_green)
+
+				
 			conn.sendall(data)
