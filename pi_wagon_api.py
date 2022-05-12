@@ -3,8 +3,8 @@ from gpiozero import LED
 
 class pi_wagon_api:
 	red = LED(17)
-	green = LED(22)
-	blue = LED(27)
+	green = LED(27)
+	blue = LED(22)
 
 	def __init__(self):
 		print('Created Pi Wagon Object')
