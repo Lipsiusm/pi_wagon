@@ -3,7 +3,7 @@ import pi_wagon_api
 
 #echo server built along side https://realpython.com/python-sockets/
 
-ip_addr = "192.168.1.82"
+ip_addr = "192.168.1.81"
 port = 42069
 pi = pi_wagon_api.pi_wagon_api()
 
@@ -34,6 +34,10 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
 				
 			if data.decode('utf-8').strip() == 'green':
 				color_green = pi.green_light()
+
+			if data.decode('utf-8').strip() == 'temp':
+				cpu_temp = pi.get_cpu_temp()
+				conn.sendall(cpu_temp.encode('utf-8'))
 			
 			
-			conn.sendall(data)
+			#conn.sendall(data)
