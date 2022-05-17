@@ -26,22 +26,16 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
 				#send pi cpu info to client
 				conn.sendall(cpu_info.encode('utf-8'))
 
-			if data.decode('utf-8').strip() == 'red':
-				color_red = pi.red_light()
-				
-			if data.decode('utf-8').strip() == 'blue':
-				color_blue = pi.blue_light()
-				
-			if data.decode('utf-8').strip() == 'green':
-				color_green = pi.green_light()
-
 			if data.decode('utf-8').strip() == 'temp':
 				cpu_temp = pi.get_cpu_temp()
 				conn.sendall(cpu_temp.encode('utf-8'))
 
-			if data.decode('utf-8').strip() == 'lights':
-				cpu_temp = pi.all_lights()
-				
+			if data.decode('utf-8').strip() == 'lightson':
+				pi.lights_on()
+			
+			if data.decode('utf-8').strip() == 'lightsoff':
+				pi.lights_off()
+
 			
 			
 			#conn.sendall(data)
