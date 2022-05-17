@@ -38,6 +38,10 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
 			if data.decode('utf-8').strip() == 'temp':
 				cpu_temp = pi.get_cpu_temp()
 				conn.sendall(cpu_temp.encode('utf-8'))
+
+			if data.decode('utf-8').strip() == 'lights':
+				cpu_temp = pi.all_lights()
+				
 			
 			
 			#conn.sendall(data)
