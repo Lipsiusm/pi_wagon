@@ -26,8 +26,8 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
 				#send pi cpu info to client
 				conn.sendall(cpu_info.encode('utf-8'))
 
-			if data.decode('utf-8').strip() == 'temp':
-				cpu_temp = pi.get_cpu_temp()
+			if data.decode('utf-8').strip() == 'currtemp':
+				cpu_temp = pi.get_curr_temp()
 				conn.sendall(cpu_temp.encode('utf-8'))
 
 			if data.decode('utf-8').strip() == 'lightson':
@@ -35,7 +35,3 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
 			
 			if data.decode('utf-8').strip() == 'lightsoff':
 				pi.lights_off()
-
-			
-			
-			#conn.sendall(data)
