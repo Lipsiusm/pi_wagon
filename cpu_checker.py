@@ -2,6 +2,7 @@ import os
 from gpiozero import LED
 from time import sleep
 
+
 light_one = LED(2)
 light_two = LED(3)
 light_three = LED(4)
@@ -13,19 +14,20 @@ light_eight = LED(9)
 light_nine = LED(11)
 light_ten = LED(0)
 
-#list of LED objects already instantiated
-list_of_lights = [light_one, light_two, light_three, light_four, \
-light_five, light_six, light_seven, light_eight, light_nine, light_ten]
+#list of LED objects that are already instantiated
+list_of_lights = [light_one, light_two, light_three, light_four, light_five, light_six, light_seven, light_eight, light_nine, light_ten]
 
 
 #get the current cpu info
 def get_cpu_info():
 	return os.popen('cat /proc/cpuinfo').read()
 
+#turn all lights off
 def lights_off():
 	for light in list_of_lights:
 		light.off()
 
+		#turn all lights on
 def lights_on():
 	for light in list_of_lights:
 		light.on()
@@ -44,6 +46,7 @@ def update_led(temperature):
 			break
 
 		#otherwise normal operating temperatures will have a range of 1-8 lights
+		#because if temperature is 80 we turn on all of them anyways
 		if index > temperature:
 			break
 		
@@ -65,6 +68,7 @@ def get_curr_temp():
 	return str(temperature_num) + 'C'
 
 def main():
+	#every 10 seconds relay the cpu temperature
 	while True:
 		curr_temp = get_curr_temp()
 		print(curr_temp)
